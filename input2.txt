@@ -1,0 +1,50 @@
+11
+Partido Brasileiro
+22
+Partido Nacional
+11
+Partido Gaucho
+-1
+11
+Pedro da Silva
+Porto Alegre
+33
+Maria de Souza
+Porto Alegre
+11
+Paulo da Silva
+Porto Alegre
+11111
+Paula de Souza
+Canoas
+33111
+Mario de Souza
+Alvorada
+11111
+Mario de Souza
+Canoas
+-1
+22
+Porto Alegre
+1
+44
+Porto Alegre
+2
+33
+Porto Alegre
+3
+11111
+Porto Alegre
+111
+44111
+Porto Alegre
+222
+22111
+Canoas
+333
+-1
+44
+44111
+Canoas
+Partido Gaucho
+44
