@@ -9,7 +9,15 @@ public class Candidatura {
 	}
 
 	public boolean cadastraCandidato(Candidato c) {
-		return false;
+		if(!candidatos.isEmpty()){
+			for(Candidato candidato : candidatos){
+				if(consultaCandidato(candidato.getNumero()) != null)
+				return false;
+			}
+		}
+
+		candidatos.add(c);
+		return true;
 	}
 
 	public Candidato consultaCandidato(String nome){

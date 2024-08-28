@@ -30,6 +30,7 @@ public class ACMEVoting {
 
 	public void executar() {
 		cadastrarPartidos();
+		cadastrarCandidatos();
 	}	
 
 	public void cadastrarPartidos(){
@@ -40,6 +41,19 @@ public class ACMEVoting {
 			Partido p = new Partido(numero, nome);
 			cadastroPartido.cadastraPartido(p);
 			System.out.println("1:" + p.getNumero() + "," + p.getNome());
+			numero = in.nextInt();
+		}
+	}
+
+	public void cadastrarCandidatos(){
+		int numero = in.nextInt();
+		while(numero != -1){
+			in.nextLine();
+			String nome = in.nextLine();
+			String municipio = in.nextLine();
+			Candidato c = new Candidato(numero, nome, municipio);
+			System.out.println("2:" + c.getNumero() + "," + c.getNome() + "," + c.getMunicipio());
+			candidatura.cadastraCandidato(c);
 			numero = in.nextInt();
 		}
 	}

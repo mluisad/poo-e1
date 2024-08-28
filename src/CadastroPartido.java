@@ -8,9 +8,12 @@ public class CadastroPartido {
 	}
 
 	public boolean cadastraPartido(Partido p) {
-		if(consultaPartido(p.getNome()) != null){
-			return false;
+		if(!partidos.isEmpty()){
+			if(consultaPartido(p.getNome()) != null){
+				return false;
+			}
 		}
+		
 		partidos.add(p);
 		return true;
 	}
