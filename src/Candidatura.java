@@ -5,15 +5,13 @@ public class Candidatura {
 
 
 	public Candidatura(){
-	candidatos = new ArrayList<>();
+		candidatos = new ArrayList<>();
 	}
 
 	public boolean cadastraCandidato(Candidato c) {
 		if(!candidatos.isEmpty()){
-			for(Candidato candidato : candidatos){
-				if(consultaCandidato(candidato.getNumero()) != null)
-				return false;
-			}
+			if(consultaCandidato(c.getNumero()) != null)
+			return false;
 		}
 
 		candidatos.add(c);
@@ -34,5 +32,13 @@ public class Candidatura {
 			return c;
 		}
 		return null;
+	}
+
+	public boolean cadastrarVotos(Candidato c, int votos){
+		if(consultaCandidato(c.getNumero()) == null){
+			return false;
+		}
+		c.setVotos(votos);
+		return true;
 	}
 }

@@ -8,6 +8,7 @@ public class Candidato {
 		this.numero = numero;
 		this.nome = nome;
 		this.municipio = municipio;
+		votos = 0;
 	}
 
 	public String getNome() {
@@ -20,6 +21,14 @@ public class Candidato {
 
 	public String getMunicipio() {
 		return municipio;
+	}
+
+	public void setVotos(int votos) {
+		this.votos = votos;
+	}
+
+	public int getVotos() {
+		return votos;
 	}
 	
 }
