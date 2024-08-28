@@ -29,6 +29,18 @@ public class ACMEVoting {
     }
 
 	public void executar() {
+		cadastrarPartidos();
+	}	
 
+	public void cadastrarPartidos(){
+		int numero = in.nextInt();
+		while(numero != -1){
+			in.nextLine();
+			String nome = in.nextLine();
+			Partido p = new Partido(numero, nome);
+			cadastroPartido.cadastraPartido(p);
+			System.out.println("1:" + p.getNumero() + "," + p.getNome());
+			numero = in.nextInt();
+		}
 	}
 }
