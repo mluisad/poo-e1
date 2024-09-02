@@ -118,8 +118,31 @@ public class ACMEVoting {
 	}
 
 	public void mostrarDadosDoPartidoComMaisCandidatos(){
-
-	}
+		int quantidadeDeCandidatos = 0;
+		int quantidadeFinal = 0;
+		Partido partidoComMaisCandidato = null;
+		
+		for(Partido p : cadastroPartido.getPartidos()){
+			for(Candidato c : candidatura.getCandidatos()){
+				String numeroPartido = Integer.toString(p.getNumero());
+				String numeroCandidato = Integer.toString(c.getNumero());
+				if(numeroCandidato.startsWith(numeroPartido)){
+					quantidadeDeCandidatos++;
+				}
+			}
+			if(quantidadeDeCandidatos > quantidadeFinal){
+				partidoComMaisCandidato = p;
+				quantidadeFinal = quantidadeDeCandidatos;
+			}
+			quantidadeDeCandidatos = 0;
+		}
+		
+		if(partidoComMaisCandidato == null){
+			System.out.println("7:Nenhum partido com candidatos.");
+		} else {
+			System.out.println("7:" + partidoComMaisCandidato.getNumero() + "," + partidoComMaisCandidato.getNome() + "," + quantidadeFinal);
+		}			
+	}	
 
 	public void mostrarDadosDePrefeitoEVereadorMaisVotados(){
 

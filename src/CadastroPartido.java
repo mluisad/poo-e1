@@ -34,4 +34,8 @@ public class CadastroPartido {
 		return null;
 	}
 
+	public ArrayList<Partido> getPartidos(){
+		return partidos;
+	}
+
 }
