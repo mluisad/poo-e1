@@ -10,12 +10,20 @@ public class Candidatura {
 
 	public boolean cadastraCandidato(Candidato c) {
 		if(!candidatos.isEmpty()){
-			if(consultaCandidato(c.getNumero()) != null)
+			if(consultaCandidato(c.getNumero(), c.getMunicipio()) != null)
 			return false;
 		}
 
 		candidatos.add(c);
 		return true;
+	}
+
+	public Candidato consultaCandidato(int numero, String municipio){
+		for (Candidato c : candidatos) {
+			if(c.getNumero() == numero && c.getMunicipio().equals(municipio))
+			return c;			
+		}
+		return null;
 	}
 
 	public Candidato consultaCandidato(String nome){
@@ -35,10 +43,11 @@ public class Candidatura {
 	}
 
 	public boolean cadastrarVotos(Candidato c, int votos){
-		if(consultaCandidato(c.getNumero()) == null){
+		if(c == null){
 			return false;
+		} else {
+			c.setVotos(votos);
+			return true;
 		}
-		c.setVotos(votos);
-		return true;
 	}
 }

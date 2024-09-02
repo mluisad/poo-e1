@@ -17,7 +17,7 @@ public class ACMEVoting {
 		cadastroPartido = new CadastroPartido();
 		
 		try{
-			BufferedReader streamEntrada = new BufferedReader(new FileReader("input.txt"));
+			BufferedReader streamEntrada = new BufferedReader(new FileReader("input3.txt"));
 			in = new Scanner(streamEntrada);
 			PrintStream streamSaida = new PrintStream(new File("outputFinal.txt"), Charset.forName("UTF-8"));
 			System.setOut(streamSaida);
@@ -32,6 +32,8 @@ public class ACMEVoting {
 		cadastrarPartidos();
 		cadastrarCandidatos();
 		cadastrarVotosDeCandidatos();
+		mostrarDadosDeUmDeterminadoPartido();
+		mostrarDadosDeUmDeterminadoCandidato();
 	}	
 
 	public void cadastrarPartidos(){
@@ -40,8 +42,10 @@ public class ACMEVoting {
 			in.nextLine();
 			String nome = in.nextLine();
 			Partido p = new Partido(numero, nome);
+			if(cadastroPartido.cadastraPartido(p)){
+				System.out.println("1:" + p.getNumero() + "," + p.getNome());
+			}
 			cadastroPartido.cadastraPartido(p);
-			System.out.println("1:" + p.getNumero() + "," + p.getNome());
 			numero = in.nextInt();
 		}
 	}
@@ -70,10 +74,32 @@ public class ACMEVoting {
 			if(candidatura.cadastrarVotos(candidatura.consultaCandidato(numero), votos)){
 				System.out.println("3:" + numero + "," + municipio + "," + votos);
 			}
-
-			System.out.println(candidatura.consultaCandidato(numero).getVotos());
 			numero = in.nextInt();
 		}
 	}
 
+	public void mostrarDadosDeUmDeterminadoPartido(){
+		int numero = in.nextInt();
+		if(cadastroPartido.consultaPartido(numero) == null){
+			System.out.println("4:Nenhum partido encontrado.");
+		} else {
+			//4:numero,nome
+			System.out.println("4:" + numero + "," + cadastroPartido.consultaPartido(numero).getNome());
+		}
+	}
+
+	public void mostrarDadosDeUmDeterminadoCandidato(){
+		int numero = in.nextInt();
+		in.nextLine();
+		String municipio = in.nextLine();
+		if(candidatura.consultaCandidato(numero, municipio) == null){
+			System.out.println("5:Nenhum candidato encontrado.");
+		} else{
+			System.out.println("5:" + numero + "," + candidatura.consultaCandidato(numero, municipio).getNome() + "," + municipio + "," + candidatura.consultaCandidato(numero, municipio).getVotos());
+		}
+	}
+
+	//6. Mostrar os votos dos prefeitos de um determinado partido:
+	//7. Mostrar os dados do partido com mais candidatos:
+	//8. Mostrar os dados do prefeito e do vereador mais votados:
 }

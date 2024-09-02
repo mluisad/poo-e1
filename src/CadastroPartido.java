@@ -9,7 +9,7 @@ public class CadastroPartido {
 
 	public boolean cadastraPartido(Partido p) {
 		if(!partidos.isEmpty()){
-			if(consultaPartido(p.getNome()) != null){
+			if(consultaPartido(p.getNumero()) != null){
 				return false;
 			}
 		}
