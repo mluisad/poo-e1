@@ -50,4 +50,8 @@ public class Candidatura {
 			return true;
 		}
 	}
+
+	public ArrayList<Candidato> getCandidatos(){
+		return candidatos;
+	}
 }

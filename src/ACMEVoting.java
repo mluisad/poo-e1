@@ -34,6 +34,9 @@ public class ACMEVoting {
 		cadastrarVotosDeCandidatos();
 		mostrarDadosDeUmDeterminadoPartido();
 		mostrarDadosDeUmDeterminadoCandidato();
+		mostrarVotosDosPrefeitosDeUmDeterminadoPartido();
+		mostrarDadosDoPartidoComMaisCandidatos();
+		mostrarDadosDePrefeitoEVereadorMaisVotados();
 	}	
 
 	public void cadastrarPartidos(){
@@ -73,6 +76,7 @@ public class ACMEVoting {
 			int votos = in.nextInt();
 			if(candidatura.cadastrarVotos(candidatura.consultaCandidato(numero), votos)){
 				System.out.println("3:" + numero + "," + municipio + "," + votos);
+				candidatura.cadastrarVotos(candidatura.consultaCandidato(numero), votos);
 			}
 			numero = in.nextInt();
 		}
@@ -98,8 +102,28 @@ public class ACMEVoting {
 			System.out.println("5:" + numero + "," + candidatura.consultaCandidato(numero, municipio).getNome() + "," + municipio + "," + candidatura.consultaCandidato(numero, municipio).getVotos());
 		}
 	}
+	
+	public void mostrarVotosDosPrefeitosDeUmDeterminadoPartido(){
+		String nome = in.nextLine();
+		if(cadastroPartido.consultaPartido(nome) == null){
+			System.out.println("6:Nenhum partido encontrado.");
+		} else {
+			//6:nomepartido,númeroprefeito,nomeprefeito,municipio,votos
+			for(Candidato c : candidatura.getCandidatos()){
+				if(c.getNumero() == cadastroPartido.consultaPartido(nome).getNumero()){
+					System.out.println("6:" + nome + "," + c.getNumero() + "," + c.getNome() + "," + c.getMunicipio() + "," + c.getVotos());
+				}
+			}
+		}
+	}
 
-	//6. Mostrar os votos dos prefeitos de um determinado partido:
-	//7. Mostrar os dados do partido com mais candidatos:
-	//8. Mostrar os dados do prefeito e do vereador mais votados:
+	public void mostrarDadosDoPartidoComMaisCandidatos(){
+
+	}
+
+	public void mostrarDadosDePrefeitoEVereadorMaisVotados(){
+
+	}
+
+
 }
