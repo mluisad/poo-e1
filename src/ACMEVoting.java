@@ -136,7 +136,7 @@ public class ACMEVoting {
 			}
 			quantidadeDeCandidatos = 0;
 		}
-		
+
 		if(partidoComMaisCandidato == null){
 			System.out.println("7:Nenhum partido com candidatos.");
 		} else {
@@ -145,8 +145,29 @@ public class ACMEVoting {
 	}	
 
 	public void mostrarDadosDePrefeitoEVereadorMaisVotados(){
-
+		Candidato prefeito = null;
+		Candidato vereador = null;
+		int tempP = 0;
+		int tempV = 0;
+		if(candidatura.getCandidatos().isEmpty()){
+			System.out.println("8:Nenhum candidato encontrado.");
+		} else {
+			for(Candidato c : candidatura.getCandidatos()){	
+				String numeroCandidato = Integer.toString(c.getNumero());
+				if(numeroCandidato.length() == 2){
+					if(c.getVotos() > tempP){
+						tempP = c.getVotos();
+						prefeito = c;
+					}
+				} else {
+					if(c.getVotos() > tempV){
+						tempV = c.getVotos();
+						vereador = c;
+					}
+				}
+			}
+			System.out.println("8:" + prefeito.getNumero() + "," + prefeito.getNome() + "," + prefeito.getMunicipio() + "," + prefeito.getVotos());
+			System.out.println("8:" + vereador.getNumero() + "," + vereador.getNome() + "," + vereador.getMunicipio() + "," + vereador.getVotos());
+		}
 	}
-
-
 }
