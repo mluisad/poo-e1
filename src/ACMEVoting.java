@@ -17,7 +17,7 @@ public class ACMEVoting {
 		cadastroPartido = new CadastroPartido();
 		
 		try{
-			BufferedReader streamEntrada = new BufferedReader(new FileReader("input3.txt"));
+			BufferedReader streamEntrada = new BufferedReader(new FileReader("input.txt"));
 			in = new Scanner(streamEntrada);
 			PrintStream streamSaida = new PrintStream(new File("outputFinal.txt"), Charset.forName("UTF-8"));
 			System.setOut(streamSaida);
@@ -59,11 +59,13 @@ public class ACMEVoting {
 			in.nextLine();
 			String nome = in.nextLine();
 			String municipio = in.nextLine();
-			Candidato c = new Candidato(numero, nome, municipio);
-			if(candidatura.cadastraCandidato(c)){
-				System.out.println("2:" + c.getNumero() + "," + c.getNome() + "," + c.getMunicipio());
+			if(cadastroPartido.checarSeOPartidoExiste(numero)){
+				Candidato c = new Candidato(numero, nome, municipio);
+				if(candidatura.cadastraCandidato(c)){
+					System.out.println("2:" + c.getNumero() + "," + c.getNome() + "," + c.getMunicipio());
+				}
+				candidatura.cadastraCandidato(c);
 			}
-			candidatura.cadastraCandidato(c);
 			numero = in.nextInt();
 		}
 	}
@@ -74,7 +76,7 @@ public class ACMEVoting {
 			in.nextLine();
 			String municipio = in.nextLine();
 			int votos = in.nextInt();
-			if(candidatura.cadastrarVotos(candidatura.consultaCandidato(numero), votos)){
+			if(candidatura.cadastrarVotos(candidatura.consultaCandidato(numero, municipio), votos)){
 				System.out.println("3:" + numero + "," + municipio + "," + votos);
 				candidatura.cadastrarVotos(candidatura.consultaCandidato(numero), votos);
 			}
@@ -118,7 +120,6 @@ public class ACMEVoting {
 	}
 
 	public void mostrarDadosDoPartidoComMaisCandidatos(){
-		int quantidadeDeCandidatos = 0;
 		int quantidadeFinal = 0;
 		Partido partidoComMaisCandidato = null;
 		
@@ -127,14 +128,13 @@ public class ACMEVoting {
 				String numeroPartido = Integer.toString(p.getNumero());
 				String numeroCandidato = Integer.toString(c.getNumero());
 				if(numeroCandidato.startsWith(numeroPartido)){
-					quantidadeDeCandidatos++;
+					p.adicionaCandidato(c);
 				}
 			}
-			if(quantidadeDeCandidatos > quantidadeFinal){
+			if(p.retornarNumeroDeCandidatos() > quantidadeFinal){
 				partidoComMaisCandidato = p;
-				quantidadeFinal = quantidadeDeCandidatos;
+				quantidadeFinal = p.retornarNumeroDeCandidatos();
 			}
-			quantidadeDeCandidatos = 0;
 		}
 
 		if(partidoComMaisCandidato == null){
@@ -166,8 +166,10 @@ public class ACMEVoting {
 					}
 				}
 			}
-			System.out.println("8:" + prefeito.getNumero() + "," + prefeito.getNome() + "," + prefeito.getMunicipio() + "," + prefeito.getVotos());
-			System.out.println("8:" + vereador.getNumero() + "," + vereador.getNome() + "," + vereador.getMunicipio() + "," + vereador.getVotos());
+			if(prefeito != null && vereador != null){
+				System.out.println("8:" + prefeito.getNumero() + "," + prefeito.getNome() + "," + prefeito.getMunicipio() + "," + prefeito.getVotos());
+				System.out.println("8:" + vereador.getNumero() + "," + vereador.getNome() + "," + vereador.getMunicipio() + "," + vereador.getVotos());
+			}
 		}
 	}
 }

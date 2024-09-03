@@ -23,4 +23,11 @@ public class Partido {
 		candidatos.add(c);
 	}
 
+	public int retornarNumeroDeCandidatos(){
+		int temp = 0;
+		for(Candidato c : candidatos){
+			temp++;
+		}
+		return temp;
+	}
 }

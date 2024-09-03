@@ -38,4 +38,15 @@ public class CadastroPartido {
 		return partidos;
 	}
 
+	public boolean checarSeOPartidoExiste(int numero){
+		String num = Integer.toString(numero);
+		for(Partido p : partidos){
+			String numeroPartido = Integer.toString(p.getNumero());
+			if(num.startsWith(numeroPartido)){
+				return true;
+			}
+		}
+		return false;
+	}
+
 }
