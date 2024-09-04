@@ -18,7 +18,7 @@ public class ACMEVoting {
 		cadastroPartido = new CadastroPartido();
 		
 		try{
-			BufferedReader streamEntrada = new BufferedReader(new FileReader("input.txt"));
+			BufferedReader streamEntrada = new BufferedReader(new FileReader("input3.txt"));
 			in = new Scanner(streamEntrada);
 			PrintStream streamSaida = new PrintStream(new File("outputFinal.txt"), Charset.forName("UTF-8"));
 			System.setOut(streamSaida);
@@ -191,7 +191,7 @@ public class ACMEVoting {
 			String numeroPartido = Integer.toString(p.getNumero());
 			for(Candidato v : vereadores){
 				numeroVereador = Integer.toString(v.getNumero());
-				if(numeroVereador.startsWith(numeroPartido)){
+			 	if(numeroVereador.startsWith(numeroPartido)){
 					p.cadastraVotos(v.getVotos());
 				}
 			}
@@ -200,15 +200,59 @@ public class ACMEVoting {
 				temp = partidoComMaisVotosDeVereadores.getVotos();
 			}
 		}
-		System.out.println("9:" + partidoComMaisVotosDeVereadores.getNumero() + "," + partidoComMaisVotosDeVereadores.getNome() + "," + partidoComMaisVotosDeVereadores.getVotos());
+		if(partidoComMaisVotosDeVereadores != null){
+			System.out.println("9:" + partidoComMaisVotosDeVereadores.getNumero() + "," + partidoComMaisVotosDeVereadores.getNome() + "," + partidoComMaisVotosDeVereadores.getVotos());
+		}
 	}
 
 	public void mostrarMunicipioComMaiorQuantidadeDeVotos(){
+		String municipio1 = null;
+		String municipio2 = null;
+		String municipio3 = null;
+		for(Candidato c : candidatura.getCandidatos()){
+			if(municipio1 == null){
+				municipio1 = c.getMunicipio();
+			} else if (municipio2 == null && !c.getMunicipio().equals(municipio1)){
+				municipio2 = c.getMunicipio();
+			} else if (municipio3 == null && !c.getMunicipio().equals(municipio1) && !c.getMunicipio().equals(municipio2)){
+				municipio3 = c.getMunicipio();
+			}
+		}
 
+		ArrayList<Candidato> m1 = new ArrayList<>();
+		ArrayList<Candidato> m2 = new ArrayList<>();
+		ArrayList<Candidato> m3 = new ArrayList<>();
+		for(Candidato c : candidatura.getCandidatos()){
+			if(c.getMunicipio().equals(municipio1)){
+				m1.add(c);
+			} else if(c.getMunicipio().equals(municipio2)){
+				m2.add(c);
+			} else if(c.getMunicipio().equals(municipio3)){
+				m3.add(c);
+			}
+		}
+
+		int votosM1 = 0;
+		for(Candidato c : m1){
+			votosM1 = votosM1 + c.getVotos();
+		}
+
+		int votosM2 = 0;
+		for(Candidato c : m2){
+			votosM2 = votosM2 + c.getVotos();
+		}
+
+		int votosM3 = 0;
+		for(Candidato c : m3){
+			votosM3 = votosM3 + c.getVotos();
+		}
+
+		if(votosM1 > votosM2 && votosM1 > votosM3){
+			System.out.println("10:" + municipio1 + "," + votosM1);
+		} else if (votosM2 > votosM1 && votosM2 > votosM3){
+			System.out.println("10:" + municipio2 + "," + votosM2);
+		} else if (votosM3 > votosM1 && votosM3 > votosM2){
+			System.out.println("10:" + municipio3 + "," + votosM3);
+		}
 	}
-	/*Mostrar o partido com mais votos de vereadores: mostra os dados dos partidos
-com mais votos de vereadores no formato: 9:número,nome,quantidade
-Mostrar o município com maior quantidade de votos: mostra os dados do município
-que possuir maior quantidade de votos somados para prefeito e para vereadores
-no formato: 10:municipio,quantidade */
 }
