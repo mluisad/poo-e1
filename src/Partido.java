@@ -36,7 +36,7 @@ public class Partido {
 		return temp;
 	}
 
-	public void cadastraVotos(int v){
+	public void cadastrarVotos(int v){
 		votos = votos + v;
 	}
 }

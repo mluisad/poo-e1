@@ -42,14 +42,6 @@ public class Candidatura {
 		return null;
 	}
 
-	public Candidato consultaMunicipio(String municipio){
-		for(Candidato c : candidatos){
-			if(c.getMunicipio().equals(municipio))
-			return c;
-		}
-		return null;
-	}
-
 	public boolean cadastrarVotos(Candidato c, int votos){
 		if(c == null){
 			return false;

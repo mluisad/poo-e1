@@ -18,9 +18,9 @@ public class ACMEVoting {
 		cadastroPartido = new CadastroPartido();
 		
 		try{
-			BufferedReader streamEntrada = new BufferedReader(new FileReader("input3.txt"));
+			BufferedReader streamEntrada = new BufferedReader(new FileReader("input.txt"));
 			in = new Scanner(streamEntrada);
-			PrintStream streamSaida = new PrintStream(new File("outputFinal.txt"), Charset.forName("UTF-8"));
+			PrintStream streamSaida = new PrintStream(new File("output.txt"), Charset.forName("UTF-8"));
 			System.setOut(streamSaida);
 		} catch(Exception e){
 			System.out.println(e);
@@ -192,7 +192,7 @@ public class ACMEVoting {
 			for(Candidato v : vereadores){
 				numeroVereador = Integer.toString(v.getNumero());
 			 	if(numeroVereador.startsWith(numeroPartido)){
-					p.cadastraVotos(v.getVotos());
+					p.cadastrarVotos(v.getVotos());
 				}
 			}
 			if(p.getVotos() > temp){

@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class CadastroPartido {
 
 	private ArrayList<Partido> partidos;
+	
 	public CadastroPartido(){
 		partidos = new ArrayList<>();
 	}
