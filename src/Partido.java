@@ -4,6 +4,7 @@ public class Partido {
 	private ArrayList<Candidato> candidatos;
 	private int numero;
 	private String nome;
+	private int votos;
 
 	public Partido(int numero, String nome){
 		this.numero = numero;
@@ -19,6 +20,10 @@ public class Partido {
 		return numero;
 	}
 
+	public int getVotos(){
+		return votos;
+	}
+
 	public void adicionaCandidato(Candidato c) {
 		candidatos.add(c);
 	}
@@ -29,5 +34,9 @@ public class Partido {
 			temp++;
 		}
 		return temp;
+	}
+
+	public void cadastraVotos(int v){
+		votos = votos + v;
 	}
 }

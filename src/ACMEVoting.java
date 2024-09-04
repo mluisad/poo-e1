@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.PrintStream;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -37,6 +38,8 @@ public class ACMEVoting {
 		mostrarVotosDosPrefeitosDeUmDeterminadoPartido();
 		mostrarDadosDoPartidoComMaisCandidatos();
 		mostrarDadosDePrefeitoEVereadorMaisVotados();
+		mostrarPartidoComMaisVotosDeVereadores();
+		mostrarMunicipioComMaiorQuantidadeDeVotos();
 	}	
 
 	public void cadastrarPartidos(){
@@ -124,8 +127,8 @@ public class ACMEVoting {
 		Partido partidoComMaisCandidato = null;
 		
 		for(Partido p : cadastroPartido.getPartidos()){
+			String numeroPartido = Integer.toString(p.getNumero());
 			for(Candidato c : candidatura.getCandidatos()){
-				String numeroPartido = Integer.toString(p.getNumero());
 				String numeroCandidato = Integer.toString(c.getNumero());
 				if(numeroCandidato.startsWith(numeroPartido)){
 					p.adicionaCandidato(c);
@@ -172,4 +175,40 @@ public class ACMEVoting {
 			}
 		}
 	}
+
+	public void mostrarPartidoComMaisVotosDeVereadores(){
+		ArrayList<Candidato> vereadores = new ArrayList<>();
+		String numeroVereador;
+		for(Candidato c : candidatura.getCandidatos()){
+			numeroVereador = Integer.toString(c.getNumero());
+			if(numeroVereador.length() == 5){
+				vereadores.add(c);
+			}
+		}
+		Partido partidoComMaisVotosDeVereadores = null;
+		int temp = 0;
+		for(Partido p : cadastroPartido.getPartidos()){
+			String numeroPartido = Integer.toString(p.getNumero());
+			for(Candidato v : vereadores){
+				numeroVereador = Integer.toString(v.getNumero());
+				if(numeroVereador.startsWith(numeroPartido)){
+					p.cadastraVotos(v.getVotos());
+				}
+			}
+			if(p.getVotos() > temp){
+				partidoComMaisVotosDeVereadores = p;
+				temp = partidoComMaisVotosDeVereadores.getVotos();
+			}
+		}
+		System.out.println("9:" + partidoComMaisVotosDeVereadores.getNumero() + "," + partidoComMaisVotosDeVereadores.getNome() + "," + partidoComMaisVotosDeVereadores.getVotos());
+	}
+
+	public void mostrarMunicipioComMaiorQuantidadeDeVotos(){
+
+	}
+	/*Mostrar o partido com mais votos de vereadores: mostra os dados dos partidos
+com mais votos de vereadores no formato: 9:número,nome,quantidade
+Mostrar o município com maior quantidade de votos: mostra os dados do município
+que possuir maior quantidade de votos somados para prefeito e para vereadores
+no formato: 10:municipio,quantidade */
 }
